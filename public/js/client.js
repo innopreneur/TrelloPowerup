@@ -23,7 +23,7 @@ var boardButtonCallback = function (t, opts) {
 
           shortListedTasks.push(card);
           //close the card in this list
-          closeExistingCard(card.id);
+          closeExistingCard(card);
 
         }
         else if(list.name.indexOf("Todo") != -1){
