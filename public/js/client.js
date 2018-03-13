@@ -94,7 +94,7 @@ TrelloPowerUp.initialize({
       // we can either provide a button that has a callback function
       // that callback function should probably open a popup, overlay, or boardBar
       icon: WHITE_ICON,
-      text: 'Popup',
+      text: 'Get My Tasks',
       callback: boardButtonCallback
     }];
   },
