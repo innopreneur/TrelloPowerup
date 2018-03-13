@@ -14,12 +14,6 @@ var boardButtonCallback = function (t, opts) {
     .then(function (lists) {
       console.log(JSON.stringify(lists, null, 2));
 
-      lists.forEach((list) => {
-        if(list.name.indexOf("Todo") != -1){
-          console.log("TODO LIST - " + list.name);
-          todoListId = list.id;
-        }
-      });
 
     //get first cards from all GOAL lists
       lists.forEach((list) => {
@@ -27,19 +21,15 @@ var boardButtonCallback = function (t, opts) {
           console.log("GOAL LIST - " + list.name);
           var card = list.cards.shift();
 
-          //shortListedTasks.push(card);
+          shortListedTasks.push(card);
           //close the card in this list
-          //closeExistingCard(card.id);
-          if(todoListId){
-            moveCardToAnotherList(card, todoListId);
-            console.log(`Moved ${card.name} to List[${list.name}]..`);
-          }
+          closeExistingCard(card.id);
 
         }
-      /*  else if(list.name.indexOf("Todo") != -1){
+        else if(list.name.indexOf("Todo") != -1){
           console.log("TODO LIST - " + list.name);
           todoListId = list.id;
-        }*/
+        }
       });
 
     //create new cards from collected cards
