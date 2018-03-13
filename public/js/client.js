@@ -76,11 +76,54 @@ t.getAll();
 
 */
 
+var createNewCard = function(listId, card){
+  var key = "e906ee78b84a6e9d04fd467c7e1ae949";
+  var token = "056ad057942dd073e2ecdcd2e8ab18ffd69baad5cfe8c649bb0368d8fc207493";
+  fetch(`https://api.trello.com/1/cards?idList=${listId}&key=${key}&token=${token}&name=${card.name}`,
+    {
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    method: 'POST',
+    mode: 'cors',
+    redirect: 'follow',
+    referrer: 'no-referrer'
+  })
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    console.log(myJson);
+  });
+
+};
+
 var WHITE_ICON = 'https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-white.svg';
 
-
+var shortListedTasks = [];
+var todoListId = "";
 var boardButtonCallback = function (t, opts) {
   console.log('Someone clicked the board button');
+  return t.lists('all')
+    .then(function (lists) {
+      console.log(JSON.stringify(lists, null, 2));
+
+    //get first cards from all GOAL lists
+      lists.forEach((list) => {
+        if(list.name.indexOf("GOAL") != -1){
+          console.log("GOAL LIST - " + list.name);
+          shortListedTasks.push(list.cards.shift());
+        }
+        else if(list.name.indexOf("Todo") != -1){
+          console.log("TODO LIST - " + list.name);
+          todoListId = list.id;
+        }
+      });
+
+    //create new cards from collected cards
+    shortListedTasks.forEach((card) => {
+      createNewCard(todoListId,card);
+    })
+    });
+
 };
 
 // We need to call initialize to get all of our capability handles set up and registered with Trello
@@ -134,7 +177,8 @@ TrelloPowerUp.initialize({
 
     // If we want to ask the user to authorize our Power-Up to make full use of the Trello API
     // you'll need to add your API from trello.com/app-key below:
-    let trelloAPIKey = '';
+
+    let trelloAPIKey = process.env.TRELLO_API_KEY;
     // This key will be used to generate a token that you can pass along with the API key to Trello's
     // RESTful API. Using the key/token pair, you can make requests on behalf of the authorized user.
 
