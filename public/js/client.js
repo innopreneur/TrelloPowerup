@@ -36,6 +36,10 @@ var boardButtonCallback = function (t, opts) {
     shortListedTasks.forEach((card) => {
       createNewCard(todoListId,card);
       })
+
+    //remove created tasks
+    shortListedTasks = [];
+    todoListId = undefined;
     });
 
 };
