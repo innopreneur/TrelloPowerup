@@ -19,7 +19,7 @@ var boardButtonCallback = function (t, opts) {
           console.log("TODO LIST - " + list.name);
           todoListId = list.id;
         }
-      }
+      });
 
     //get first cards from all GOAL lists
       lists.forEach((list) => {
