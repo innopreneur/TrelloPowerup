@@ -19,11 +19,17 @@ var boardButtonCallback = function (t, opts) {
       lists.forEach((list) => {
         if(list.name.indexOf("GOAL") != -1){
           console.log("GOAL LIST - " + list.name);
-          var card = list.cards.shift();
 
-          shortListedTasks.push(card);
-          //close the card in this list
-          closeExistingCard(card);
+          //check if list is not empty
+          if(list.cards.length > 0){
+
+            var card = list.cards.shift();
+
+            //add card to the task list
+            shortListedTasks.push(card);
+            //close the card in this list
+            closeExistingCard(card);
+          }
 
         }
         else if(list.name.indexOf("Todo") != -1){
