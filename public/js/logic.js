@@ -39,9 +39,9 @@ var getDailyTasks = function(lists){
 }
 
 var getHoursFromTask = function(card){
-  return /::([0-9].?[0-9]?)::/g.exec(card.name)[0];
+  return /::([0-9].?[0-9]?)::/g.exec(card.name)[1];
 }
 
 var getPriorityFromList = function(list){
-  return /\(\(([0-9])\)\)/g.exec(card.name)[0];
+  return /\(\(([0-9])\)\)/g.exec(card.name)[1];
 }
