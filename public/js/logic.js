@@ -16,8 +16,8 @@ var getDailyTasks = function(lists){
 
           var hoursToWork = getHoursFromTask(card);
           console.log("hoursToWork - " + hoursToWork);
-          if(usedHours > hoursToWork){
-             usedHours -= hoursToWork;
+          if(maxHoursToWork > hoursToWork){
+             maxHoursToWork -= hoursToWork;
              //add card to the task list
              shortListedTasks.push(card);
              //close the card in this list
