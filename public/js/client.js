@@ -6,48 +6,14 @@ var Promise = TrelloPowerUp.Promise;
 
 var WHITE_ICON = 'https://cdn.hyperdev.com/us-east-1%3A3d31b21c-01a0-4da2-8827-4bc6e88b7618%2Ficon-white.svg';
 
-var shortListedTasks = [];
-var todoListId;
+
 var boardButtonCallback = function (t, opts) {
   console.log('Someone clicked the board button');
   return t.lists('all')
     .then(function (lists) {
       console.log(JSON.stringify(lists, null, 2));
-
-
-    //get first cards from all GOAL lists
-      lists.forEach((list) => {
-        if(list.name.indexOf("GOAL") != -1){
-          console.log("GOAL LIST - " + list.name);
-
-          //check if list is not empty
-          if(list.cards.length > 0){
-
-            var card = list.cards.shift();
-
-            //add card to the task list
-            shortListedTasks.push(card);
-            //close the card in this list
-            closeExistingCard(card);
-          }
-
-        }
-        else if(list.name.indexOf("Todo") != -1){
-          console.log("TODO LIST - " + list.name);
-          todoListId = list.id;
-        }
+      getDailyTasks(lists
       });
-
-    //create new cards from collected cards
-    shortListedTasks.forEach((card) => {
-      createNewCard(todoListId,card);
-      })
-
-    //remove created tasks
-    shortListedTasks = [];
-    todoListId = undefined;
-    });
-
 };
 
 // We need to call initialize to get all of our capability handles set up and registered with Trello
