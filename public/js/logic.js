@@ -15,6 +15,7 @@ var getDailyTasks = function(lists){
           var card = list.cards.shift();
 
           var hoursToWork = getHoursFromTask(card);
+          console.log("hoursToWork - " + hoursToWork);
           if(usedHours > hoursToWork){
              usedHours -= hoursToWork;
              //add card to the task list
