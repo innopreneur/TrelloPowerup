@@ -1,6 +1,6 @@
 
-var getDailyTasks = function(rescheduledTasks,lists){
-  var rescheduledTaskList = rescheduledTasks.slice();
+var getDailyTasks = function(lists){
+  var rescheduledTaskList = []
   var goals = [];
   var hoursToWorkToday = 4;
 
@@ -19,6 +19,7 @@ var getDailyTasks = function(rescheduledTasks,lists){
       else if(list.name.indexOf("Todo") != -1){
         console.log("TODO LIST - " + list.name);
         todoListId = list.id;
+        rescheduledTaskList = list.cards.slice();
       }
     });
 
