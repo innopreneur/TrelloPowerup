@@ -104,8 +104,8 @@ function calculateNetTimeToWork(rescheduledTaskList, hoursToWorkToday){
 function getActiveGoals(listOfGoals){
   let activeGoals = [];
   listOfGoals.forEach((goal) => {
-    if(/<<ACTIVE>>/g.exec(goal.name)[1]){
-      goal.priority = getPriorityFromList(goal.name)[1];
+    if(/<<ACTIVE>>/g.test(goal.name)){
+      goal.priority = getPriorityFromList(goal.name);
       activeGoals.push(goal);
     }
   });
