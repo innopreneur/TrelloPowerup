@@ -17,7 +17,7 @@ var getDailyTasks = function(lists){
         goals.push(list);
       }
       else if(list.name.indexOf("Todo") != -1){
-        console.log("TODO LIST - " + list.name);
+        console.log("TODO LIST - " + list);
         todoListId = list.id;
         rescheduledTaskList = list.cards.slice();
       }
