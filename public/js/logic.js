@@ -90,8 +90,7 @@ function calculateNetTimeToWork(rescheduledTaskList, hoursToWorkToday){
   console.log("Hours To Work at start- " + hoursToWorkToday);
   console.log("Rexcheduled List- " + JSON.stringify(rescheduledTaskList));
   rescheduledTaskList.forEach((task) => {
-    hoursToWorkToday -= task.hoursToFinish;
-    console.log("Hours To Finish - " + task.hoursToFinish);
+    hoursToWorkToday -= parseFloat(getHoursFromTask(task));
     console.log("Hours To Work - " + hoursToWorkToday);
   });
 
@@ -104,6 +103,7 @@ function calculateNetTimeToWork(rescheduledTaskList, hoursToWorkToday){
 function getActiveGoals(listOfGoals){
   let activeGoals = [];
   listOfGoals.forEach((goal) => {
+    console.log("GOAL - " + JSON.stringify(goal))
     if(/<<ACTIVE>>/g.test(goal.name)){
       goal.priority = getPriorityFromList(goal.name);
       activeGoals.push(goal);
