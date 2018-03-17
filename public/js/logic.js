@@ -105,7 +105,7 @@ function getActiveGoals(listOfGoals){
   listOfGoals.forEach((goal) => {
     console.log("GOAL - " + JSON.stringify(goal))
     if(/<<ACTIVE>>/g.test(goal.name)){
-      goal.priority = getPriorityFromList(goal.name);
+      goal.priority = getPriorityFromList(goal);
       activeGoals.push(goal);
     }
   });
